@@ -1,4 +1,4 @@
-var container, scene, camera, renderer, controls;
+var container, scene, camera, renderer, controls, stats;
 var gui, guiParams;
 
 function initGraphics() {
@@ -35,20 +35,26 @@ function initGraphics() {
     renderer.clear();
     scene.add(new THREE.HemisphereLight(0xffffff, 0x222222));
     scene.add(new THREE.GridHelper(50, 50));
+
+    stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.domElement);
 }
 
 function animate() {
-    requestAnimationFrame(animate);
+    stats.begin();
     controls.update();
     renderer.render(scene, camera);
+    stats.end();
+    requestAnimationFrame(animate);
 }
 
 function initGui() {
     gui = new dat.GUI({ autoPlace: true, width: 500 });
     guiParams = new(function() {
-        this.nodesPerDimension = 5;
+        this.number = 5;
     })();
-    gui.add(guiParams, 'nodesPerDimension').min(2).max(16).step(1).onFinishChange(function() {});
+    gui.add(guiParams, 'number').min(2).max(16).step(1).onFinishChange(function() {});
 }
 
 // code entry point
