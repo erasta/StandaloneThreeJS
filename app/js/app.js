@@ -34,7 +34,7 @@ function initGraphics() {
     renderer.setClearColor(0xffffff, 1);
     renderer.clear();
     scene.add(new THREE.HemisphereLight(0xffffff, 0x222222));
-    scene.add(new THREE.GridHelper(30, 1));
+    scene.add(new THREE.GridHelper(50, 50));
 }
 
 function animate() {
