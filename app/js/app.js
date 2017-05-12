@@ -1,19 +1,25 @@
 var container, scene, camera, renderer, controls, stats;
 var gui, guiParams;
+var mesh;
 
 function initApp() {
     var material = new THREE.MeshStandardMaterial({ color: 'red' });
-    var mesh = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), material);
+    mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), material);
     mesh.position.set(0, 0, 3);
     scene.add(mesh);
+}
+
+function applyGuiChanges() {
+    // console.log(guiParams.ballSize);
+    mesh.scale.set(guiParams.ballSize, guiParams.ballSize, guiParams.ballSize);
 }
 
 function initGui() {
     gui = new dat.GUI({ autoPlace: true, width: 500 });
     guiParams = new(function() {
-        this.number = 5;
+        this.ballSize = 3;
     })();
-    gui.add(guiParams, 'number').min(2).max(16).step(1).onFinishChange(function() {});
+    gui.add(guiParams, 'ballSize').name('Ball size').min(0.1).max(16).step(0.01).onChange(applyGuiChanges);
 }
 
 function initGraphics() {
@@ -37,10 +43,10 @@ function initGraphics() {
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     container.appendChild(renderer.domElement);
 
-    // Stats of FPS
-    stats = new Stats();
-    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild(stats.domElement);
+    // // Stats of FPS
+    // stats = new Stats();
+    // stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    // document.body.appendChild(stats.domElement);
 
     // CAMERA
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 3000);
@@ -72,10 +78,10 @@ function initGraphics() {
 }
 
 function animate() {
-    stats.begin();
+    // stats.begin();
     // controls.update();
     renderer.render(scene, camera);
-    stats.end();
+    // stats.end();
     requestAnimationFrame(animate);
 }
 
