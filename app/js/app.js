@@ -7,6 +7,7 @@ function initApp() {
     mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), material);
     mesh.position.set(0, 0, 3);
     scene.add(mesh);
+    applyGuiChanges();
 }
 
 function applyGuiChanges() {
@@ -79,7 +80,6 @@ function initGraphics() {
 
 function animate() {
     // stats.begin();
-    // controls.update();
     renderer.render(scene, camera);
     // stats.end();
     requestAnimationFrame(animate);
