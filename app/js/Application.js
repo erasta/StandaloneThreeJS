@@ -2,12 +2,13 @@ class Application {
     init() {
         this.ballSize = 3;
 
+        this.initGui();
+
         var material = new THREE.MeshStandardMaterial({ color: 'red' });
         this.mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 32), material);
         this.mesh.position.set(0, 0, 3);
         this.sceneManager.scene.add(this.mesh);
 
-        this.initGui();
         this.applyGuiChanges();
     }
 
