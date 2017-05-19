@@ -1,6 +1,5 @@
 class SceneManager {
-    constructor() {
-        this.animate = this.animate.bind(this);
+    constructor(application) {
         THREE.Object3D.DefaultUp.set(0, 0, 1);
 
         // SCENE
@@ -52,6 +51,15 @@ class SceneManager {
             dirLight.position.set(pos[0] * 100, pos[1] * 100, pos[2] * 100);
             this.scene.add(dirLight);
         });
+
+        if (application) {
+            this.application = application;
+            this.application.sceneManager = this;
+            this.application.init();
+        }
+
+        this.animate = this.animate.bind(this);
+        this.animate();
     }
 
     animate() {
