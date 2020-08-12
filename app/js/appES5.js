@@ -31,15 +31,10 @@ function initGraphics() {
     container = document.getElementById('ThreeJS');
 
     // RENDERER
-    if (Detector.webgl) {
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-    } else {
-        renderer = new THREE.CanvasRenderer();
-    }
+    renderer = new THREE.WebGLRenderer({ antialias: true });
 
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
-    renderer.setFaceCulling(0);
 
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     container.appendChild(renderer.domElement);

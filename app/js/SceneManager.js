@@ -7,11 +7,7 @@ class SceneManager {
         this.container = document.getElementById('ThreeJS');
 
         // RENDERER
-        if (Detector.webgl) {
-            this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        } else {
-            this.renderer = new THREE.CanvasRenderer();
-        }
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
 
         this.renderer.gammaInput = true;
         this.renderer.gammaOutput = true;
